@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+</head>
+<body>
+<div style='text-align:center; width:100%'>
+<h2 >Добро пожаловать!</h2>
+<br/>
+
+<p>Сколько пользователей вывести в список?<p/>
+
+
+<form th:action="@{/users/usersbycounter}">
+    <input type="text" th:name="counter"/>
+    <input type="submit"/>
+</form>
+<br>
+
+
+
+<a href="/users"> ПОКАЗАТЬ ВЕСЬ СПИСОК ПОЛЬЗОВАТЕЛЕЙ </a>
+
+<br>
+<br>
+
+    <a href="/users/new"> СОЗДАТЬ НОВОГО ПОЛЬЗОВАТЕЛЯ </a>
+
+    </div>
+
+<!--<div th:each="person : ${people}">-->
+<!--    <a th:href="@{/people/{id}(id=${person.getId()})}" th:text="${person.getName()}">User</a>-->
+
+<!--</div>-->
+
+</body>
+</html>

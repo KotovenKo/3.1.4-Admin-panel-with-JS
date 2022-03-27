@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All users by counter</title>
+</head>
+<body>
+<h2 align="center">Список пользователей</h2>
+<br/>
+
+<br/>
+<div>
+    <table style="margin: 0 auto; border: solid 1px blue;">
+        <tr>
+            <th width="50" align="left"> ID</th>
+            <th width="100" align="left"> Имя</th>
+            <th width="100" align="left"> Фамилия</th>
+            <th width="100" align="left"> Возраст</th>
+            <th width="150" align="left"> Почта</th>
+        </tr>
+        <tr th:each="user : ${users}">
+            <td  width="50" th:text="${user.getId()}"></td>
+            <td  width="100" th:text="${user.getName()}"></td>
+            <td  width="100" th:text="${user.getSecondName()}"></td>
+            <td  width="100" th:text="${user.getAge()}"></td>
+            <td  width="150" th:text="${user.getEmail()}"></td>
+        </tr>
+    </table>
+</div>
+<br/>
+<br/>
+
+</body>
+</html>
