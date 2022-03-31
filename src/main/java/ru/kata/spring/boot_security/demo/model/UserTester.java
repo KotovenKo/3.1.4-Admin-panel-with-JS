@@ -29,21 +29,19 @@ public class UserTester {
       Role user = roleService.getRoleByName("ROLE_USER");
 
       //Creating Users with Roles with encripted password
-      User tom = new User("Tom", "Cruise", 34, "cruise@gmail.com");
+      User tom = new User("Tom", "Cruise", "1234", 34, "cruise@gmail.com");
       tom.getRoles().add(admin);
-      tom.setPassword(passwordEncoder.encode("1234"));
-      tom.getRoles().add(user);
 
-      User bruce = new User("Bruce", "LEE", "$2a$10$86lzXpEGuhYJunM1j1KV.eh3mrQFfSSQ843C1Z.zN5ELpYDl5umUW",35, "lee@gmail.com");
+      User bruce = new User("Bruce", "LEE", "1234",35, "lee@gmail.com");
       bruce.getRoles().add(admin);
 
-      User chack = new User("Chack", "Norris", "$2a$10$86lzXpEGuhYJunM1j1KV.eh3mrQFfSSQ843C1Z.zN5ELpYDl5umUW",33, "norris@gmail.com");
+      User chack = new User("Chack", "Norris", "1234",33, "norris@gmail.com");
       chack.getRoles().add(user);
 
-      User sylvester = new User("Sylvester", "Stallone", "$2a$10$86lzXpEGuhYJunM1j1KV.eh3mrQFfSSQ843C1Z.zN5ELpYDl5umUW",55, "stallone@gmail.com");
+      User sylvester = new User("Sylvester", "Stallone", "1234",55, "stallone@gmail.com");
       sylvester.getRoles().add(user);
 
-      User keanu = new User("Keanu", "Reeves", "$2a$10$86lzXpEGuhYJunM1j1KV.eh3mrQFfSSQ843C1Z.zN5ELpYDl5umUW",56, "reeves@gmail.com");
+      User keanu = new User("Keanu", "Reeves", "1234",56, "reeves@gmail.com");
       keanu.getRoles().add(user);
 
       //Saving Users with Roles in DataBase

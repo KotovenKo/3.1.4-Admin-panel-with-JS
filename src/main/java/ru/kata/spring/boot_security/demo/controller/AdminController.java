@@ -56,9 +56,7 @@ public class AdminController {
         if (bindingResult.hasErrors()) {
             return "admin/new";
         } else {
-            String encodedPassword = passwordEncoder.encode(user.getPassword());
             Role role = roleService.getRoleByName(stringrole);
-            user.setPassword(encodedPassword);
             user.getRoles().add(role);
             userService.addUser(user);
             return "redirect:/admin";
@@ -76,11 +74,9 @@ public class AdminController {
         if(bindingResult.hasErrors()){
             return "admin/edit";
         } else {
-            String encodedPassword = passwordEncoder.encode(user.getPassword());
             Role role = roleService.getRoleByName(stringrole);
-            user.setPassword(encodedPassword);
             user.getRoles().add(role);
-            userService.addUser(user);
+            userService.update(id, user);
             return "redirect:/admin";
         }
     }
