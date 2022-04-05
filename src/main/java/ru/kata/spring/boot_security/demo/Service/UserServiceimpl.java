@@ -46,14 +46,26 @@ public class UserServiceimpl implements UserService {
 
     @Override
     public void update(long id, User user) {
-        if (user.getPassword().equals("")){
+        System.out.println("in update service method");
+        System.out.println(user.getId());
+        System.out.println(user.getPassword());
+        System.out.println(user.getName());
+        System.out.println(user.getSecondName());
+        if (user.getPassword().equals("")) {
+            System.out.println("in update with old password");
             User userInDb = userDAOCrudRepo.findUserById(user.getId());
             user.setPassword(userInDb.getPassword());
             userDAOCrudRepo.save(user);
         } else {
-            String encodedPassword = passwordEncoder.encode(user.getPassword());
-            user.setPassword(encodedPassword);
-            userDAOCrudRepo.save(user);
+            User userInDb = userDAOCrudRepo.findUserById(user.getId());
+            String password = userInDb.getPassword();
+            if (passwordEncoder.matches(password, user.getPassword())) {
+
+                System.out.println("in update service method with new password");
+//            String encodedPassword = passwordEncoder.encode(user.getPassword());
+//            user.setPassword(encodedPassword);
+                userDAOCrudRepo.save(user);
+            }
         }
     }
 

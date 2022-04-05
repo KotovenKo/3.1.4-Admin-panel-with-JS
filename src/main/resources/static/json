@@ -1,0 +1,6 @@
+{"id":1,"name":"Tom",
+"secondName":"Cruise",
+"password":"password",
+"age":34,
+"email":"cruise@gmail.com",
+"roles":[{"id":1,"name":"ROLE_ADMIN"}]}

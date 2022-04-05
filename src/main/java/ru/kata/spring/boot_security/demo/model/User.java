@@ -13,12 +13,12 @@ public class User {
     private long id;
 
     @Column(name = "name", unique = true)
-    @Size(min = 2, message = "Минимум 2 символа")
+    @Size(min = 2, message = "Поле должно содержать минимум 2 символа")
     @NotBlank(message = "Поле не должно быть пустым")
     private String name;
 
     @Column(name = "secondname")
-    @Size(min = 2, message = "Минимум 2 символа")
+    @Size(min = 2, message = "Поле должно содержать минимум 2 символа")
     @NotBlank(message = "Поле не должно быть пустым")
     private String secondName;
 

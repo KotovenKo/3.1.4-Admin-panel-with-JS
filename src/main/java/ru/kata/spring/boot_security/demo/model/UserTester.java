@@ -31,6 +31,7 @@ public class UserTester {
       //Creating Users with Roles with encripted password
       User tom = new User("Tom", "Cruise", "1234", 34, "cruise@gmail.com");
       tom.getRoles().add(admin);
+      tom.getRoles().add(user);
 
       User bruce = new User("Bruce", "LEE", "1234",35, "lee@gmail.com");
       bruce.getRoles().add(admin);
