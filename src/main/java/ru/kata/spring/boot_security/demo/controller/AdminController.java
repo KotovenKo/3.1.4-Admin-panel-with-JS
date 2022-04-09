@@ -1,6 +1,7 @@
 package ru.kata.spring.boot_security.demo.controller;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,6 +18,7 @@ import ru.kata.spring.boot_security.demo.model.User;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -55,22 +57,23 @@ public class AdminController {
     public String createUserPage(Model model, Principal principal) {
         User registeredUser = userSecurityService.findUserByName(principal.getName());
         model.addAttribute("user", new User());
-        String stringrole = "ROLE_USER";
-        model.addAttribute("stringrole", stringrole);
+       Set<Role> roles = roleService.getRoles();
+        System.out.println(roles);
+        model.addAttribute("listOfRoles", roles);
         model.addAttribute("registeredUser", registeredUser);
         return "admin/new";
     }
 
     @PostMapping("")
-    public String createCar(Model model, Principal principal, @RequestParam("stringrole") String stringrole, @Valid @ModelAttribute(value = "user") User user,
+    public String createCar(Model model, Principal principal, @Valid @ModelAttribute(value = "user") User user,
                             BindingResult bindingResult) {
         User registeredUser = userSecurityService.findUserByName(principal.getName());
+        System.out.println(user.getRoles());
         if (bindingResult.hasErrors()) {
             model.addAttribute("registeredUser", registeredUser);
             return "admin/new";
         } else {
-            Role role = roleService.getRoleByName(stringrole);
-            user.getRoles().add(role);
+
             userService.addUser(user);
             return "redirect:/admin";
         }
@@ -106,7 +109,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
-    public String update (@ModelAttribute(value = "updatedUser") User user){
+    public String update ( User user){
         System.out.println("in update controller method");
         System.out.println(user.getPassword());
         System.out.println(user.getName());

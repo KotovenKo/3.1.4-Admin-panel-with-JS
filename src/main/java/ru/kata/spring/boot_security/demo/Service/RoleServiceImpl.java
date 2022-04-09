@@ -14,7 +14,7 @@ public class RoleServiceImpl implements RoleService{
 
     @Override
     public Set<Role> getRoles() {
-        return null;
+        return roleDAORepo.findAll();
     }
 
     @Override

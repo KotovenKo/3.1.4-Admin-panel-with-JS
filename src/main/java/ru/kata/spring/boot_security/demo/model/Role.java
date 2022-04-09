@@ -2,6 +2,7 @@ package ru.kata.spring.boot_security.demo.model;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -49,6 +50,8 @@ public class Role {
 
     @Override
     public String toString() {
-        return name;
+        return this.name;
     }
+
+
 }
