@@ -17,8 +17,10 @@ public class Role {
     @Column(name = "name")
     private String name;
 
-    @ManyToMany(mappedBy = "roles")
+    @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
     private Set<User> users = new HashSet<>();
+
+    private boolean isActive;
 
     public Role(long id, String name) {
         this.id = id;
@@ -53,5 +55,24 @@ public class Role {
         return this.name;
     }
 
+    public boolean isActive() {
+        return isActive;
+    }
 
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Role role = (Role) o;
+        return id == role.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

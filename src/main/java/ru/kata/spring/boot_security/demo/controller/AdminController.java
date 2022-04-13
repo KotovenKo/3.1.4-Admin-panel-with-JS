@@ -14,6 +14,7 @@ import ru.kata.spring.boot_security.demo.Service.UserSecurityService;
 import ru.kata.spring.boot_security.demo.Service.UserService;
 import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
+import ru.kata.spring.boot_security.demo.model.UserRoles;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.validation.Valid;
@@ -38,6 +39,7 @@ public class AdminController {
     @Autowired
     private UserSecurityService userSecurityService;
 
+
     @GetMapping("")
     public String lisOfUsers(Model model, Principal principal) {
         User registeredUser = userSecurityService.findUserByName(principal.getName());
@@ -57,7 +59,7 @@ public class AdminController {
     public String createUserPage(Model model, Principal principal) {
         User registeredUser = userSecurityService.findUserByName(principal.getName());
         model.addAttribute("user", new User());
-       Set<Role> roles = roleService.getRoles();
+        Set<Role> roles = roleService.getRoles();
         System.out.println(roles);
         model.addAttribute("listOfRoles", roles);
         model.addAttribute("registeredUser", registeredUser);
@@ -68,7 +70,6 @@ public class AdminController {
     public String createCar(Model model, Principal principal, @Valid @ModelAttribute(value = "user") User user,
                             BindingResult bindingResult) {
         User registeredUser = userSecurityService.findUserByName(principal.getName());
-        System.out.println(user.getRoles());
         if (bindingResult.hasErrors()) {
             model.addAttribute("registeredUser", registeredUser);
             return "admin/new";
@@ -85,43 +86,35 @@ public class AdminController {
         return "admin/edit";
     }
 
-//    @PutMapping("{id}")
-//    public String update( @PathVariable("id") long id, @RequestParam("stringrole") String stringrole, @ModelAttribute(value = "user") @Valid User user, BindingResult bindingResult) {
-//        if(bindingResult.hasErrors()){
-//            return "admin/edit";
-//        } else {
-//            Role role = roleService.getRoleByName(stringrole);
-//            user.getRoles().add(role);
-//            userService.update(id, user);
-//            return "redirect:/admin";
-//        }
-//    }
-
-//    For bootstrap modal view
-
+    //    For bootstrap modal view
     @GetMapping("/find")
     @ResponseBody
-    public User findUser(Long id, Model model) {
-        User user = userService.getUser(id);
-        System.out.println(user.getName()+" "+ user.getRoles());
-        model.addAttribute("updatedUser", user);
-        return user;
+    public UserRoles findUser(Long id, Model model) {
+        User foundUser = userService.getUser(id);
+        Set<Role> allRoles = roleService.getRoles();
+        return new UserRoles(allRoles, foundUser);
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
-    public String update ( User user){
-        System.out.println("in update controller method");
-        System.out.println(user.getPassword());
-        System.out.println(user.getName());
-        System.out.println(user.getSecondName());
-        userService.update(1,user);
+    public String update(@RequestParam(value = "roleForm") String roleForm, User user) {
+        if (roleForm.contains("ROLE_USER")) {
+            user.getRoles().add(roleService.getRoleByName("ROLE_USER"));
+        }
+        if (roleForm.contains("ROLE_ADMIN")) {
+            user.getRoles().add(roleService.getRoleByName("ROLE_ADMIN"));
+        }
+        userService.update(user);
         return "redirect:/admin";
     }
 
-
-    @DeleteMapping("{id}")
-    public String delete(@PathVariable("id") long id) {
-        userService.delete(id);
+    @DeleteMapping("/delete")
+    public String delete(User user, Principal principal) {
+        User egisteredUser = userSecurityService.findUserByName(principal.getName());
+        if (user.getId() == egisteredUser.getId()) {
+            userService.delete(user.getId());
+            return "redirect:/login";
+        }
+        userService.delete(user.getId());
         return "redirect:/admin";
     }
 
