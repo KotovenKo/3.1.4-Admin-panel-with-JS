@@ -7,7 +7,6 @@ import ru.kata.spring.boot_security.demo.Service.RoleService;
 import ru.kata.spring.boot_security.demo.Service.UserService;
 
 import javax.annotation.PostConstruct;
-import javax.transaction.Transactional;
 
 
 @Component

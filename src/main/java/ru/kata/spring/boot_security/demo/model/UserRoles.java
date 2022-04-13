@@ -1,13 +1,7 @@
 package ru.kata.spring.boot_security.demo.model;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.kata.spring.boot_security.demo.Service.RoleService;
-import ru.kata.spring.boot_security.demo.Service.RoleServiceImpl;
-import ru.kata.spring.boot_security.demo.Service.UserService;
 
-import javax.transaction.Transactional;
-import java.util.List;
 import java.util.Set;
 
 @Component

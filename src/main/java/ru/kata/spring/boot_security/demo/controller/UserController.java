@@ -4,9 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.kata.spring.boot_security.demo.Service.RoleService;
 import ru.kata.spring.boot_security.demo.Service.UserSecurityService;
-import ru.kata.spring.boot_security.demo.Service.UserService;
 import ru.kata.spring.boot_security.demo.model.User;
 
 import java.security.Principal;

@@ -1,9 +1,7 @@
 package ru.kata.spring.boot_security.demo.controller;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnoreType;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,10 +14,8 @@ import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.model.UserRoles;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
